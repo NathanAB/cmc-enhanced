@@ -16,7 +16,7 @@
         "https://coinmarketcap.com/*"
       ],
       "js": [
-        "src/inject/inject.js"
+        "src/main.js"
       ]
     }
   ]

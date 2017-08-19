@@ -1,0 +1,30 @@
+{
+  "name": "cmc-enhanced",
+  "version": "1.0.0",
+  "description": "Adds enhancements to the cryptocurrency site CoinMarketCap.com",
+  "main": "src/main.js",
+  "dependencies": {
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-react": "^7.2.1",
+    "eslint-plugin-jsx-a11y": "^5.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NathanAB/cmc-enhanced.git"
+  },
+  "author": "NathanAB",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NathanAB/cmc-enhanced/issues"
+  },
+  "homepage": "https://github.com/NathanAB/cmc-enhanced#readme"
+}
