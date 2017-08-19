@@ -1,0 +1,106 @@
+$bgDark: #333;
+$bgLight: #DDD;
+$bgLighter: #EEE;
+$textColor: #CCC;
+$textColorDark: #777;
+$redText: #de5858;
+$greenText: #49c773;
+$linkColor: #64a3da;
+
+body {
+  background-color: $bgDark !important;
+
+  .col-lg-10 {
+    color: $textColor !important;
+
+    a {
+      color: $linkColor;
+    }
+
+    #title a {
+      color: $textColor !important;
+    }
+
+    #nav-main {
+      background-color: $bgLight !important;
+    }
+
+    .nav-tabs > li.active > a, .nav-tabs > li > a:hover,
+    .pagination > li > a, .pagination > li > span {
+      background-color: $bgLight !important;
+      color: $textColorDark;
+    }
+
+    .pagination > li > a, .pagination > li > span {
+      &:hover {
+        background-color: $bgLighter !important;
+      }
+    }
+
+    .negative_change {
+      color: $redText !important;
+    }
+
+    .positive_change {
+      color: $greenText !important;
+    }
+
+    // The 7-day graphs are a bit too bright with this theme,
+    // so making them just slightly transparent
+    img.sparkline {
+      opacity: 0.9;
+    }
+
+    .loading {
+      background: none;
+    }
+  }
+
+  // --- Coin Page ---
+  .coin-summary-item h3 {
+    background-color: transparent !important;
+  }
+
+  .highcharts-container {
+    text {
+      color: $textColor !important;
+      fill: $textColor !important;
+    }
+
+    .highcharts-background {
+      fill: $bgDark !important;
+    }
+
+    .highcharts-button, .highcharts-legend {
+      rect {
+        fill: $bgLight !important;
+      }
+      text {
+        color: $textColorDark !important;
+        fill: $textColorDark !important;
+      }
+    }
+
+    .highcharts-tooltip {
+      text {
+        color: $textColorDark !important;
+        fill: $textColorDark !important;
+      }
+    }
+  }
+
+  .nav.nav-tabs {
+    // background-color: $bgLight !important;
+    color: $textColorDark;
+  }
+}
+
+// Ad removal
+.GoogleActiveViewClass, .tynt-ad-container, .kmn-div, #leaderboard-bottom,
+#icobanner-wrapper, #leaderboard, body .container .col-lg-2 {
+  display: none !important;
+}
+.container {
+  // Prevents main content from being pushed aside when ads appear
+  position: static !important;
+}

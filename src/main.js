@@ -1,4 +1,5 @@
 let volCapSortOrder = true;
+const nightMode = true;
 
 // Simple $ selector, who needs jQuery anyway?
 function $(q) {
@@ -47,8 +48,18 @@ function addNewColumn($row) {
   const cap = parseFloat($row.querySelector('.market-cap').attributes['data-usd'].value);
   const vol = parseFloat($row.querySelector('a[class="volume"]').attributes['data-usd'].value);
   const volToCap = (((vol / cap) * 100).toFixed(2));
-  const colorRatio = (Math.min(volToCap, VOL_CAP_MAX) / VOL_CAP_MAX) * 45;
-  const colorVal = `hsl(140, 100%, ${colorRatio}%)`;
+  let colorRatio;
+  let alpha;
+
+  if (nightMode) {
+    colorRatio = 100 - ((Math.min(volToCap, VOL_CAP_MAX) / VOL_CAP_MAX) * 45);
+    alpha = 0.8;
+  } else {
+    colorRatio = (Math.min(volToCap, VOL_CAP_MAX) / VOL_CAP_MAX) * 45;
+    alpha = 1;
+  }
+
+  const colorVal = `hsla(140, 100%, ${colorRatio}%, ${alpha})`;
 
   const $newColumnCell = document.createElement('td');
   $newColumnCell.className = 'no-wrap text-right';
@@ -60,14 +71,8 @@ function addNewColumn($row) {
 
 const $tableContainer = $('.container .row .col-lg-10');
 const $table = $tableContainer.querySelector('table');
-const $ads = $('#icobanner-wrapper, #leaderboard, .container .col-lg-2');
 const $currencyHeader = $('#currencies_wrapper table thead tr');
 const $currencyRows = $('#currencies_wrapper table tbody tr');
-
-// Hide ads!
-for (let i = 0; i < $ads.length; i += 1) {
-  $ads[i].style.display = 'none';
-}
 
 // Expand the main table to fill the entire window
 $tableContainer.style.width = '100%';

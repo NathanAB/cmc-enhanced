@@ -16,7 +16,10 @@
         "https://coinmarketcap.com/*"
       ],
       "js": [
-        "src/main.js"
+        "js/bundle.js"
+      ],
+      "css": [
+        "css/style.css"
       ]
     }
   ]
