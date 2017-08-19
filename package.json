@@ -1,6 +1,6 @@
 {
   "name": "cmc-enhanced",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Adds enhancements to the cryptocurrency site CoinMarketCap.com",
   "main": "src/main.js",
   "homepage": "https://www.twitter.com/nathanab_",

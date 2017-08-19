@@ -1,5 +1,5 @@
 let volCapSortOrder = true;
-const nightMode = true;
+let nightTheme;
 
 // Simple $ selector, who needs jQuery anyway?
 function $(q) {
@@ -51,7 +51,7 @@ function addNewColumn($row) {
   let colorRatio;
   let alpha;
 
-  if (nightMode) {
+  if (nightTheme) {
     colorRatio = 100 - ((Math.min(volToCap, VOL_CAP_MAX) / VOL_CAP_MAX) * 45);
     alpha = 0.8;
   } else {
@@ -74,19 +74,21 @@ chrome.storage.sync.get({
 }, (settings) => {
   if (settings.useNightTheme) {
     $('body').className += ' cmc-enhanced-night';
+    nightTheme = true;
+  }
+
+  const $tableContainer = $('.container .row .col-lg-10');
+  const $table = $tableContainer.querySelector('table');
+  const $currencyHeader = $('#currencies_wrapper table thead tr');
+  const $currencyRows = $('#currencies_wrapper table tbody tr');
+
+  // Expand the main table to fill the entire window
+  $tableContainer.style.width = '100%';
+
+  // Enhance currency data
+  addNewHeader($table, $currencyHeader);
+  for (let i = 0; i < $currencyRows.length; i += 1) {
+    addNewColumn($currencyRows[i]);
   }
 });
 
-const $tableContainer = $('.container .row .col-lg-10');
-const $table = $tableContainer.querySelector('table');
-const $currencyHeader = $('#currencies_wrapper table thead tr');
-const $currencyRows = $('#currencies_wrapper table tbody tr');
-
-// Expand the main table to fill the entire window
-$tableContainer.style.width = '100%';
-
-// Enhance currency data
-addNewHeader($table, $currencyHeader);
-for (let i = 0; i < $currencyRows.length; i += 1) {
-  addNewColumn($currencyRows[i]);
-}
