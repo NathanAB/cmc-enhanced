@@ -1,40 +1,28 @@
-// Simple $ selector
-var $ = function(q) {
-	var elems = document.querySelectorAll(q);
-	return elems.length === 1 ? elems[0] : elems;
+var volCapSortOrder = true;
+var $tableContainer = $('.container .row .col-lg-10');
+var $table = $tableContainer.querySelector('table');
+var $ads = $('#icobanner-wrapper, #leaderboard, .container .col-lg-2');
+var $currencyHeader = $('#currencies_wrapper table thead tr');
+var $currencyRows = $('#currencies_wrapper table tbody tr');
+
+// Hide ads!
+for (var i = 0; i < $ads.length; i++) {
+	$ads[i].style.display = 'none';
 }
 
-var volCapSortOrder = true;
+// Expand the main table to fill the entire window
+$tableContainer.style.width = '100%';
 
-// chrome.extension.sendMessage({}, function(response) {
-// 	var readyStateCheckInterval = setInterval(function() {
-// 	if (document.readyState === 'interactive') {
-// 		clearInterval(readyStateCheckInterval);
-		expandMainTable();
-// 	}
-// 	}, 10);
-// });
+// Enhance currency data
+addNewHeader($table, $currencyHeader);
+for (var i = 0; i < $currencyRows.length; i++) {
+	addNewColumn($currencyRows[i]);
+}
 
-function expandMainTable() {
-	var $tableContainer = $('.container .row .col-lg-10');
-	var $table = $tableContainer.querySelector('table');
-	var $ads = $('#icobanner-wrapper, #leaderboard, .container .col-lg-2');
-	var $currencyHeader = $('#currencies_wrapper table thead tr');
-	var $currencyRows = $('#currencies_wrapper table tbody tr');
-
-	// Hide ads!
-	for (var i = 0; i < $ads.length; i++) {
-		$ads[i].style.display = 'none';
-	}
-
-	// Expand the main table to fill the entire window
-	$tableContainer.style.width = '100%';
-
-	// Enhance currency data
-	addNewHeader($table, $currencyHeader);
-	for (var i = 0; i < $currencyRows.length; i++) {
-		addNewColumn($currencyRows[i]);
-	}
+// Simple $ selector
+function $(q) {
+	var elems = document.querySelectorAll(q);
+	return elems.length === 1 ? elems[0] : elems;
 }
 
 /**
