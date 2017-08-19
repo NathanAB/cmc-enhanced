@@ -32,6 +32,10 @@ module.exports = {
         from: './icons/*',
         to: './',
       },
+      {
+        from: './options/*',
+        to: './',
+      },
     ]),
     new ExtractTextPlugin({
       filename: 'css/style.css',

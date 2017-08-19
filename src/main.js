@@ -69,6 +69,14 @@ function addNewColumn($row) {
   $row.insertBefore($newColumnCell, $neighbor);
 }
 
+chrome.storage.sync.get({
+  useNightTheme: true,
+}, (settings) => {
+  if (settings.useNightTheme) {
+    $('body').className += ' cmc-enhanced-night';
+  }
+});
+
 const $tableContainer = $('.container .row .col-lg-10');
 const $table = $tableContainer.querySelector('table');
 const $currencyHeader = $('#currencies_wrapper table thead tr');
