@@ -5,6 +5,6 @@ The extension is hosted **[here!](https://chrome.google.com/webstore/detail/coin
 )**
 
 ### Screnshots
-![](http://i.imgur.com/pMZM24D.png)
+![](http://i.imgur.com/KgARUwq.png)
 
-![](http://i.imgur.com/tZxhuG6.png)
+![](http://i.imgur.com/JHeI46X.png)
