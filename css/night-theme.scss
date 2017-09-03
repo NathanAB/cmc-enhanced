@@ -1,39 +1,110 @@
-$bgDark: #333;
+$bgDarker: #1e212e;
+$bgDark: #252839;
 $bgLight: #DDD;
 $bgLighter: #EEE;
-$textColor: #CCC;
-$textColorDark: #777;
+$navTextColor: #e0e0e0;
+$textColor: #C5C5C5;
+$textColorDark: #677077;
+$borderColor: #4f4f4f;
 $redText: #de5858;
 $greenText: #49c773;
-$linkColor: #64a3da;
+$linkColor: #f2b632;
 
-body.cmc-enhanced-night {
+body {
+  color: $textColor !important;
   background-color: $bgDark !important;
 
-  .col-lg-10 {
-    color: $textColor !important;
+  a {
+    color: $linkColor !important;
+  }
 
-    a {
-      color: $linkColor;
+  /* --- TOP BAR --- */
+  #top-nav-outer-container {
+    background-color: $bgDarker !important;
+    border-color: $borderColor !important;
+  }
+
+  /* --- DROPDOWNS --- */
+  .dropdown-menu {
+    background-color: $bgDarker !important;
+
+    li {
+      &.divider {
+        background-color: $borderColor !important;
+      }
+      > a {
+        &:hover, &:focus {
+          background-color: $bgDark !important;
+        }
+      }
     }
+  }
 
+  /* --- MAIN TABLE --- */
+  .col-lg-10 {
     #title a {
       color: $textColor !important;
     }
 
-    #nav-main {
-      background-color: $bgLight !important;
-    }
+    .btn-primary {
+      background-color: #df9c0c !important;
+      border-color: #513905 !important;
 
-    .nav-tabs > li.active > a, .nav-tabs > li > a:hover,
-    .pagination > li > a, .pagination > li > span {
-      background-color: $bgLight !important;
-      color: $textColorDark;
-    }
-
-    .pagination > li > a, .pagination > li > span {
       &:hover {
-        background-color: $bgLighter !important;
+        background-color: #c2880a;
+      }
+    }
+
+    /* --- MAIN NAV --- */
+    #nav-main {
+      background-color: $bgDarker !important;
+      border-color: $borderColor !important;
+
+      .dropdown.open .dropdown-toggle,
+      .dropdown:hover .dropdown-toggle {
+        background-color: $bgDark !important;
+      }
+
+      #quick-search-box {
+        border-color: $borderColor !important;
+        background-color: $bgDark !important;
+      }
+
+      .tt-dropdown-menu {
+        background-color: $bgDarker !important;
+      }
+    }
+
+    /* --- TABLE NAV --- */
+    .nav.nav-tabs {
+      color: $linkColor;
+      border-color: $borderColor;
+
+      .active .dropdown-toggle,
+      .dropdown-toggle:hover {
+        border-color: $borderColor !important;
+      }
+
+      .dropdown-open .dropdown-menu li > a {
+        &:hover,&:focus {
+          background-color: $bgDark !important;
+        }
+      }
+    }
+    .nav-tabs > li.active > a,
+    .nav-tabs > li > a:hover,
+    .nav-tabs > li > a:focus,
+    .nav-tabs > li.open > a,
+    .pagination > li > a,
+    .pagination > li > span {
+      background-color: $bgDarker !important;
+      color: $linkColor;
+      border-color: $borderColor !important;
+    }
+    .pagination > li > a,
+    .pagination > li > span {
+      &:hover {
+        background-color: $bgDark !important;
       }
     }
 
@@ -48,17 +119,23 @@ body.cmc-enhanced-night {
     // The 7-day graphs are a bit too bright with this theme,
     // so making them just slightly transparent
     img.sparkline {
-      opacity: 0.9;
+      opacity: 0.85;
     }
 
     .loading {
       background: none;
+    }
+
+    // Borders and lines
+    tr, th, td, hr {
+      border-color: $borderColor !important;
     }
   }
 
   // --- Coin Page ---
   .coin-summary-item h3 {
     background-color: transparent !important;
+    border-color: $borderColor !important;
   }
 
   .highcharts-container {
@@ -73,11 +150,11 @@ body.cmc-enhanced-night {
 
     .highcharts-button, .highcharts-legend {
       rect {
-        fill: $bgLight !important;
+        fill: $bgDarker !important;
       }
       text {
-        color: $textColorDark !important;
-        fill: $textColorDark !important;
+        color: $textColor !important;
+        fill: $textColor !important;
       }
     }
 
@@ -89,15 +166,16 @@ body.cmc-enhanced-night {
     }
   }
 
-  .nav.nav-tabs {
-    // background-color: $bgLight !important;
-    color: $textColorDark;
-  }
 }
 
 // Ad removal
-.GoogleActiveViewClass, .tynt-ad-container, .kmn-div, #leaderboard-bottom,
-#icobanner-wrapper, #leaderboard, body .container .col-lg-2 {
+.GoogleActiveViewClass,
+.tynt-ad-container,
+.kmn-div,
+#leaderboard-bottom,
+#icobanner-wrapper,
+#leaderboard,
+body .container .col-lg-2 {
   display: none !important;
 }
 .container {
