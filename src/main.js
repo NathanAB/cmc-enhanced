@@ -4,7 +4,10 @@ let nightTheme = true;
 // Simple $ selector, who needs jQuery anyway?
 function $(q) {
   const elems = document.querySelectorAll(q);
-  return elems.length === 1 ? elems[0] : elems;
+  if (elems.length) {
+    return elems.length === 1 ? elems[0] : elems;
+  }
+  return false;
 }
 
 function sortTable(table, col, reverse) {
@@ -84,13 +87,38 @@ const $tableContainer = $('.container .row .col-lg-10');
 const $table = $tableContainer.querySelector('table');
 const $currencyHeader = $('#currencies_wrapper table thead tr');
 const $currencyRows = $('#currencies_wrapper table tbody tr');
+const $coinPageTitle = $('.col-xs-6.col-sm-4.col-md-4');
+const $coinPageLinkList = $('.col-xs-4.col-sm-4 .list-unstyled');
 
 // Expand the main table to fill the entire window
 $tableContainer.style.width = '100%';
 
 // Enhance currency data
-addNewHeader($table, $currencyHeader);
-for (let i = 0; i < $currencyRows.length; i += 1) {
-  addNewColumn($currencyRows[i]);
+if ($table && $currencyHeader) {
+  addNewHeader($table, $currencyHeader);
+  for (let i = 0; i < $currencyRows.length; i += 1) {
+    addNewColumn($currencyRows[i]);
+  }
 }
 
+// Add the TradingView link to coin pages
+if ($coinPageTitle && $coinPageLinkList) {
+  const coinAbbr = $coinPageTitle.querySelector('small').textContent.slice(1, -1);
+  const tradingViewURL = `https://www.tradingview.com/symbols/${coinAbbr}USD/`;
+
+  const $chartIcon = document.createElement('span');
+  $chartIcon.className = 'glyphicon glyphicon-stats text-gray';
+  $chartIcon.setAttribute('title', 'TradingView');
+
+  const $chartLink = document.createElement('a');
+  $chartLink.setAttribute('href', tradingViewURL);
+  $chartLink.setAttribute('target', '_blank');
+  $chartLink.innerText = 'TradingView';
+
+  const $chartLinkListItem = document.createElement('li');
+  $chartLinkListItem.prepend($chartLink);
+  $chartLinkListItem.prepend(document.createTextNode(' '));
+  $chartLinkListItem.prepend($chartIcon);
+
+  $coinPageLinkList.prepend($chartLinkListItem);
+}
