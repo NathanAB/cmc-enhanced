@@ -1,5 +1,7 @@
 $bgDarker: #1e212e;
 $bgDark: #252839;
+$lowVolBg: #282a33;
+$noDataBg: #2c2d30;
 $bgLight: #DDD;
 $bgLighter: #EEE;
 $navTextColor: #e0e0e0;
@@ -130,6 +132,14 @@ body {
     // Borders and lines
     tr, th, td, hr {
       border-color: $borderColor !important;
+
+      &.low-volume {
+        background-color: $lowVolBg;
+      }
+
+      &.no-data {
+        background-color: $noDataBg;
+      }
     }
   }
 
