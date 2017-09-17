@@ -196,3 +196,44 @@ body .container .col-lg-2,
   // Prevents main content from being pushed aside when ads appear
   position: static !important;
 }
+
+// Refresh Timer
+.auto-refresh {
+  position: fixed;
+  bottom: 0px;
+  right: 20px;
+  background-color: $bgLighter;
+  opacity: 0.2;
+  color: $textColorDark;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 3px;
+  transition: opacity 0.2s;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  text-align: center;
+  cursor: pointer;
+
+  .time {
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: baseline;
+  }
+
+  .timer-label {
+    width: 0px;
+    display: inline-block;
+    overflow: hidden;
+    transition: width 0.2s;
+    vertical-align: middle;
+  }
+
+  &:hover {
+    opacity: 0.9;
+    transition: opacity 0.2s;
+    .timer-label {
+      width: 75px;
+      transition: width 0.2s;
+    }
+  }
+}

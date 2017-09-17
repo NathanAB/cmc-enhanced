@@ -1,8 +1,8 @@
 // Saves options to chrome.storage
 function saveOptions() {
-  const useNightTheme = document.querySelector('.night-theme-checkbox').checked;
+  const autoRefresh = document.querySelector('.auto-refresh').value;
   chrome.storage.sync.set({
-    useNightTheme,
+    autoRefresh,
   });
 }
 
@@ -11,11 +11,11 @@ function saveOptions() {
 function restoreOptions() {
   // Night theme on by default
   chrome.storage.sync.get({
-    useNightTheme: true,
+    autoRefresh: 15,
   }, (settings) => {
-    document.querySelector('.night-theme-checkbox').checked = settings.useNightTheme;
+    document.querySelector('.auto-refresh').value = settings.autoRefresh;
   });
 }
 
 document.addEventListener('DOMContentLoaded', restoreOptions);
-document.querySelector('.night-theme-checkbox').addEventListener('change', saveOptions);
+document.querySelector('.auto-refresh').addEventListener('change', saveOptions);

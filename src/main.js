@@ -1,5 +1,6 @@
 const HomePage = require('./HomePage');
 const CoinPage = require('./CoinPage');
+const AutoRefresh = require('./AutoRefresh');
 const $ = require('./FakeQuery');
 
 const $tableContainer = $('.container .row .col-lg-10');
@@ -28,3 +29,32 @@ if ($table && $currencyAllHeader) {
 if ($coinPageTitle && $coinPageLinkList) {
   CoinPage.updateCoinPage($coinPageTitle, $coinPageLinkList);
 }
+
+chrome.storage.sync.get({
+  autoRefresh: 10,
+}, (settings) => {
+  if (settings.autoRefresh > 0) {
+    const timerContainer = document.createElement('div');
+    timerContainer.className = 'auto-refresh';
+    timerContainer.setAttribute('seconds', settings.autoRefresh * 60);
+    timerContainer.onclick = () => {
+      if (chrome.runtime.openOptionsPage) {
+        chrome.runtime.openOptionsPage();
+      } else {
+        window.open(chrome.runtime.getURL('options/index.html'));
+      }
+    };
+
+    const timerLabel = document.createElement('div');
+    timerLabel.className = 'timer-label';
+    timerLabel.innerHTML = 'Refreshing&nbspin ';
+
+    const timerTime = document.createElement('div');
+    timerTime.className = 'time';
+    timerContainer.appendChild(timerLabel);
+    timerContainer.appendChild(timerTime);
+    document.body.appendChild(timerContainer);
+
+    AutoRefresh.setRefreshTimer(settings.autoRefresh);
+  }
+});

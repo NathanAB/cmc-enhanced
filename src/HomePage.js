@@ -1,19 +1,6 @@
 let volCapSortOrder = true;
 const nightTheme = true;
 
-/* 
- *   -- Night mode forced on by default for now. --
- * 
- *   chrome.storage.sync.get({
- *     useNightTheme: true,
- *   }, (settings) => {
- *     if (settings.useNightTheme) {
- *       $('body').className += ' cmc-enhanced-night';
- *       nightTheme = true;
- *     }
- *   });
- */
-
 function sortTable(table, col, reverse) {
   const tb = table.tBodies[0];
   const reverser = -((+reverse) || -1);
