@@ -1,3 +1,6 @@
+const Favorites = require('./Favorites.js');
+const $ = require('./FakeQuery.js');
+
 let volCapSortOrder = true;
 const nightTheme = true;
 
@@ -31,7 +34,9 @@ function sortTable(table, col, reverse) {
  */
 function addNewHeader($table, $currencyHeader, columnOffset) {
   const $neighbor = $currencyHeader.children[$currencyHeader.childElementCount - columnOffset];
+  const $favHeader = $currencyHeader.children[0].cloneNode(true);
   const $newColumnHeader = $neighbor.cloneNode(true);
+
   $newColumnHeader.className = 'sortable text-right sorting';
   $newColumnHeader.attributes['aria-label'].value = 'Vol / Cap';
   $newColumnHeader.id = 'th-vol-cap';
@@ -39,7 +44,14 @@ function addNewHeader($table, $currencyHeader, columnOffset) {
   $newColumnHeader.addEventListener('click', () => {
     sortTable($table, $currencyHeader.childElementCount - columnOffset - 1, volCapSortOrder);
   });
+
+  $favHeader.className = 'sortable text-right sorting';
+  $favHeader.attributes['aria-label'].value = 'Favorite';
+  $favHeader.id = 'th-fav';
+  $favHeader.innerHTML = 'Fav.';
+
   $currencyHeader.insertBefore($newColumnHeader, $neighbor);
+  $currencyHeader.insertBefore($favHeader, $currencyHeader.children[0]);
 }
 
 function addNewColumn($row, columnOffset) {
@@ -70,13 +82,44 @@ function addNewColumn($row, columnOffset) {
   $row.insertBefore($newColumnCell, $neighbor);
 }
 
+function addFavoriteStar($row) {
+  const coinName = $row.getAttribute('id').substr(3);
+  const $neighbor = $row.children[0];
+  const $newColumnCell = document.createElement('td');
+  $newColumnCell.className = 'no-wrap text-right';
+  $newColumnCell.appendChild(Favorites.createStarElem(coinName));
+  $row.insertBefore($newColumnCell, $neighbor);
+}
+
 function updateMainTable($table, $currencyHeader, $currencyRows, columnOffset) {
   addNewHeader($table, $currencyHeader, columnOffset);
   for (let i = 0; i < $currencyRows.length; i += 1) {
     addNewColumn($currencyRows[i], columnOffset);
+    addFavoriteStar($currencyRows[i]);
   }
+}
+
+function addFavoritesFilter($table, $tableCategoryTabs) {
+  const toggleElem = document.createElement('li');
+  toggleElem.className = 'favorites-filter';
+  toggleElem.innerHTML = '<label><input type="checkbox"> Favorites Only</label>';
+  $tableCategoryTabs.appendChild(toggleElem);
+  $('.favorites-filter input').onchange = (e) => {
+    const isFiltering = e.currentTarget.checked;
+    const rows = $table.querySelectorAll('tbody tr');
+    for (let i = 0; i < rows.length; i += 1) {
+      const row = rows[i];
+      const isFavorite = row.querySelector('.favorite-star').getAttribute('is-favorite') === 'true';
+      if (!isFavorite && isFiltering) {
+        row.classList.add('hidden');
+      } else {
+        row.classList.remove('hidden');
+      }
+    }
+  };
 }
 
 module.exports = {
   updateMainTable,
+  addFavoritesFilter,
 };

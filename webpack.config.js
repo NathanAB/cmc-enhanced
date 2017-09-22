@@ -10,6 +10,7 @@ module.exports = {
     path: `${__dirname}/build`,
     filename: 'js/bundle.js',
   },
+  devtool: 'eval',
   module: {
     rules: [{
       test: /\.(sass|scss)$/,

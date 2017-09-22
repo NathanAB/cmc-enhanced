@@ -177,6 +177,28 @@ body {
     }
   }
 
+  .favorite-star {
+    color: $linkColor;
+    font-size: 18px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .favorites-filter {
+    padding-top: 11px;
+    padding-left: 10px;
+
+    label {
+      font-weight: normal;
+
+      input {
+        vertical-align: top;
+      }
+    }
+  }
 }
 
 // Ad removal
