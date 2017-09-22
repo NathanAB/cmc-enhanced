@@ -1,5 +1,4 @@
-const Favorites = require('./Favorites.js');
-const $ = require('./FakeQuery.js');
+const Favorites = require('./Favorites');
 
 let volCapSortOrder = true;
 const nightTheme = true;
@@ -99,27 +98,6 @@ function updateMainTable($table, $currencyHeader, $currencyRows, columnOffset) {
   }
 }
 
-function addFavoritesFilter($table, $tableCategoryTabs) {
-  const toggleElem = document.createElement('li');
-  toggleElem.className = 'favorites-filter';
-  toggleElem.innerHTML = '<label><input type="checkbox"> Favorites Only</label>';
-  $tableCategoryTabs.appendChild(toggleElem);
-  $('.favorites-filter input').onchange = (e) => {
-    const isFiltering = e.currentTarget.checked;
-    const rows = $table.querySelectorAll('tbody tr');
-    for (let i = 0; i < rows.length; i += 1) {
-      const row = rows[i];
-      const isFavorite = row.querySelector('.favorite-star').getAttribute('is-favorite') === 'true';
-      if (!isFavorite && isFiltering) {
-        row.classList.add('hidden');
-      } else {
-        row.classList.remove('hidden');
-      }
-    }
-  };
-}
-
 module.exports = {
   updateMainTable,
-  addFavoritesFilter,
 };

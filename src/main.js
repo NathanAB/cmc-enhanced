@@ -1,5 +1,6 @@
 const HomePage = require('./HomePage');
 const AutoRefresh = require('./AutoRefresh');
+const CoinPage = require('./CoinPage');
 const $ = require('./FakeQuery');
 const Favorites = require('./Favorites');
 
@@ -10,12 +11,16 @@ const $currencyRows = $('#currencies_wrapper table tbody tr');
 const $currencyAllHeader = $('#currencies-all_wrapper table thead tr');
 const $currencyAllRows = $('#currencies-all_wrapper table tbody tr');
 const $tableCategoryTabs = $('#category-tabs');
+const $coinPageTitle = $('.col-sm-4.col-md-4');
+const $coinPageLinkList = $('.row .list-unstyled');
 
+// Load settings first
 chrome.storage.sync.get({
   autoRefresh: 10,
   favorites: [],
+  favoritesFilter: false,
 }, (settings) => {
-  Favorites.setFavorites(settings.favorites);
+  Favorites.setFavorites(settings.favorites, settings.favoritesFilter);
   if (settings.autoRefresh > 0) {
     const timerContainer = document.createElement('div');
     timerContainer.className = 'auto-refresh';
@@ -55,8 +60,13 @@ chrome.storage.sync.get({
   }
 
   // Add the TradingView link to coin pages
+  if ($coinPageTitle && $coinPageLinkList) {
+    CoinPage.updateCoinPage($coinPageTitle, $coinPageLinkList);
+  }
+
+  // Add favorites filter toggle
   if ($table && $tableCategoryTabs && ($currencyHeader || $currencyAllHeader)) {
-    HomePage.addFavoritesFilter($table, $tableCategoryTabs);
+    Favorites.addFavoritesFilter($table, $tableCategoryTabs);
   }
 });
 
