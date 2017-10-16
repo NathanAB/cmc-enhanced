@@ -90,11 +90,46 @@ function addFavoriteStar($row) {
   $row.insertBefore($newColumnCell, $neighbor);
 }
 
+function makeRowClickable($row) {
+  const coinRowId = $row.getAttribute('id') + '_rowDetail';
+  const iframeId = $row.getAttribute('id') + '_rowIframe';
+  const numCols = $row.getElementsByTagName('td').length;
+  const href = $row.getElementsByTagName('a')[0].href;
+  $row.onclick = function(e) {
+    if (e.target.tagName.toLowerCase() == 'a') return;
+    if (e.target.className,contains('favorite-star')) return;
+    row = document.getElementById(coinRowId)
+    if (row) {
+        if (row.classList.contains('hidden')) {
+            row.classList.remove('hidden');
+            document.getElementById(iframeId).contentWindow.location.reload();
+        }
+        else {
+            row.classList.add('hidden');
+        }
+        //row.parentNode.removeChild(row);
+    }
+    else {
+        var newRow = document.createElement('tr');
+        $row.parentNode.insertBefore(newRow, $row.nextSibling);
+        newRow.id = coinRowId;
+        newRow.classList.add('detailview');
+        var newEl = newRow.insertCell(0);
+        newEl.colSpan = numCols;
+        var iframe = document.createElement('iframe');
+        iframe.id = iframeId;
+        iframe.src = href;
+        newEl.appendChild(iframe);
+    }
+  };
+}
+
 function updateMainTable($table, $currencyHeader, $currencyRows, columnOffset) {
   addNewHeader($table, $currencyHeader, columnOffset);
   for (let i = 0; i < $currencyRows.length; i += 1) {
     addNewColumn($currencyRows[i], columnOffset);
     addFavoriteStar($currencyRows[i]);
+    makeRowClickable($currencyRows[i]);
   }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "CoinMarketCap Enhanced",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "manifest_version": 2,
   "description": "Adds some enhancements to the cryptocurrency site CoinMarketCap.com",
   "homepage_url": "https://twitter.com/nathanab_",
@@ -23,6 +23,7 @@
       "matches": [
         "https://coinmarketcap.com/*"
       ],
+      "all_frames": true,
       "js": [
         "js/bundle.js"
       ],

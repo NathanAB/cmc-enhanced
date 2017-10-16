@@ -44,7 +44,7 @@ function addFavoritesFilter($table, $tableCategoryTabs) {
   const checkbox = $('.favorites-filter input');
   checkbox.onchange = (e) => {
     const isFiltering = e.currentTarget.checked;
-    const rows = $table.querySelectorAll('tbody tr');
+    const rows = $table.querySelectorAll('tbody tr:not(.detailview)');
     for (let i = 0; i < rows.length; i += 1) {
       const row = rows[i];
       const isFavorite = row.querySelector('.favorite-star').getAttribute('is-favorite') === 'true';
