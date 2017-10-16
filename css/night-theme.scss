@@ -143,6 +143,16 @@ body {
     }
   }
 
+  // Responsive Table
+  .DTFC_Cloned {
+    td, th {
+      background-color: $bgDark;
+    }
+  }
+  .DTFC_LeftWrapper .DTFC_LeftHeadWrapper, .DTFC_LeftWrapper .DTFC_LeftBodyWrapper {
+    border-color: $borderColor !important;
+  }
+
   // --- Coin Page ---
   .coin-summary-item h3 {
     background-color: transparent !important;
