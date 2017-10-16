@@ -97,7 +97,7 @@ function makeRowClickable($row) {
   const href = $row.getElementsByTagName('a')[0].href;
   $row.onclick = function(e) {
     if (e.target.tagName.toLowerCase() == 'a') return;
-    if (e.target.className,contains('favorite-star')) return;
+    if (e.target.classList.contains('favorite-star')) return;
     row = document.getElementById(coinRowId)
     if (row) {
         if (row.classList.contains('hidden')) {
