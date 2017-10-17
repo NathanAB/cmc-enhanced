@@ -1,4 +1,5 @@
 const Favorites = require('./Favorites');
+const $ = require('jquery');
 
 let volCapSortOrder = true;
 const nightTheme = true;
@@ -91,35 +92,51 @@ function addFavoriteStar($row) {
 }
 
 function makeRowClickable($row) {
-  const coinRowId = $row.getAttribute('id') + '_rowDetail';
-  const iframeId = $row.getAttribute('id') + '_rowIframe';
+  const coinRowId = `${$row.getAttribute('id')}_rowDetail`;
+  const iframeId = `${$row.getAttribute('id')}_rowIframe`;
   const numCols = $row.getElementsByTagName('td').length;
   const href = $row.getElementsByTagName('a')[0].href;
-  $row.onclick = function(e) {
-    if (e.target.tagName.toLowerCase() == 'a') return;
-    if (e.target.classList.contains('favorite-star')) return;
-    row = document.getElementById(coinRowId)
-    if (row) {
-        if (row.classList.contains('hidden')) {
-            row.classList.remove('hidden');
-            document.getElementById(iframeId).contentWindow.location.reload();
-        }
-        else {
-            row.classList.add('hidden');
-        }
-        //row.parentNode.removeChild(row);
+  $row.onclick = (e) => {
+    if (e.target.tagName.toLowerCase() === 'a' || e.target.classList.contains('favorite-star')) {
+      return;
     }
-    else {
-        var newRow = document.createElement('tr');
-        $row.parentNode.insertBefore(newRow, $row.nextSibling);
-        newRow.id = coinRowId;
-        newRow.classList.add('detailview');
-        var newEl = newRow.insertCell(0);
-        newEl.colSpan = numCols;
-        var iframe = document.createElement('iframe');
-        iframe.id = iframeId;
-        iframe.src = href;
-        newEl.appendChild(iframe);
+
+    const row = document.getElementById(coinRowId);
+    if (row) {
+      const iframe = document.getElementById(iframeId);
+      if (iframe.style.display === 'none') {
+        $(iframe).slideDown('slow');
+      } else {
+        $(iframe).slideUp('slow');
+      }
+    } else {
+      const newRow = document.createElement('tr');
+      $row.parentNode.insertBefore(newRow, $row.nextSibling);
+      newRow.id = coinRowId;
+      newRow.classList.add('detail-view');
+
+      const newEl = newRow.insertCell(0);
+      newEl.colSpan = numCols;
+      newEl.style.position = 'relative';
+
+      const iframe = document.createElement('iframe');
+      iframe.id = iframeId;
+      iframe.src = href;
+
+      const curtain = document.createElement('div');
+      curtain.className = 'detail-curtain';
+      curtain.textContent = 'Loading Chart...';
+
+      newEl.appendChild(curtain);
+      newEl.appendChild(iframe);
+      $(iframe).hide();
+      $(iframe).slideDown('slow');
+
+      // Arbitrary curtain timeout to allow page to load first...
+      // There's probably a better way to do this.
+      setTimeout(() => {
+        $(curtain).fadeOut('slow');
+      }, 2500);
     }
   };
 }

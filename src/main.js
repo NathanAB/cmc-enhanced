@@ -14,12 +14,26 @@ const $tableCategoryTabs = $('#category-tabs');
 const $coinPageTitle = $('.col-sm-4.col-md-4');
 const $coinPageLinkList = $('.row .list-unstyled');
 
+
+function inIframe() {
+  try {
+    return window.self !== window.top;
+  } catch (e) {
+    return true;
+  }
+}
+
 // Load settings first
 chrome.storage.sync.get({
   autoRefresh: 10,
   favorites: [],
   favoritesFilter: false,
 }, (settings) => {
+  if (inIframe()) {
+    CoinPage.shrinkToChart();
+    return;
+  }
+
   Favorites.setFavorites(settings.favorites, settings.favoritesFilter);
   if (settings.autoRefresh > 0) {
     const timerContainer = document.createElement('div');
