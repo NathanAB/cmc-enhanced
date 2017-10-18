@@ -1,4 +1,5 @@
 const Favorites = require('./Favorites');
+const $ = require('jquery');
 
 let volCapSortOrder = true;
 const nightTheme = true;
@@ -90,11 +91,62 @@ function addFavoriteStar($row) {
   $row.insertBefore($newColumnCell, $neighbor);
 }
 
+function makeRowClickable($row) {
+  const coinRowId = `${$row.getAttribute('id')}_rowDetail`;
+  const iframeId = `${$row.getAttribute('id')}_rowIframe`;
+  const numCols = $row.getElementsByTagName('td').length;
+  const href = $row.getElementsByTagName('a')[0].href;
+  $row.onclick = (e) => {
+    if (e.target.tagName.toLowerCase() === 'a' || e.target.classList.contains('favorite-star')) {
+      return;
+    }
+
+    const row = document.getElementById(coinRowId);
+    if (row) {
+      const iframe = document.getElementById(iframeId);
+      if (iframe.style.display === 'none') {
+        $(iframe).slideDown('slow');
+      } else {
+        $(iframe).slideUp('slow');
+      }
+    } else {
+      const newRow = document.createElement('tr');
+      $row.parentNode.insertBefore(newRow, $row.nextSibling);
+      newRow.id = coinRowId;
+      newRow.classList.add('detail-view');
+
+      const newEl = newRow.insertCell(0);
+      newEl.colSpan = numCols;
+      newEl.style.position = 'relative';
+
+      const iframe = document.createElement('iframe');
+      iframe.id = iframeId;
+      iframe.src = href;
+
+      const curtain = document.createElement('div');
+      curtain.className = 'detail-curtain';
+      curtain.textContent = 'Loading Chart...';
+
+      newEl.appendChild(curtain);
+      newEl.appendChild(iframe);
+      $(iframe).hide();
+      $(iframe).slideDown('slow');
+
+      // Arbitrary curtain timeout to allow page to load first...
+      // There's probably a better way to do this.
+      setTimeout(() => {
+        $(curtain).fadeOut('slow');
+      }, 2500);
+    }
+  };
+}
+
 function updateMainTable($table, $currencyHeader, $currencyRows, columnOffset) {
   addNewHeader($table, $currencyHeader, columnOffset);
   for (let i = 0; i < $currencyRows.length; i += 1) {
     addNewColumn($currencyRows[i], columnOffset);
     addFavoriteStar($currencyRows[i]);
+    makeRowClickable($currencyRows[i]);
   }
 }
 

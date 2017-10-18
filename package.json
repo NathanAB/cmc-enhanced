@@ -1,6 +1,6 @@
 {
   "name": "cmc-enhanced",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "Adds enhancements to the cryptocurrency site CoinMarketCap.com",
   "main": "src/main.js",
   "homepage": "https://www.twitter.com/nathanab_",
@@ -12,8 +12,9 @@
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.2.1",
-    "eslint-plugin-jsx-a11y": "^5.1.1"
+    "jquery": "^3.2.1"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.0.1",
