@@ -33,7 +33,7 @@ chrome.storage.sync.get({
     CoinPage.shrinkToChart();
     return;
   }
-  
+
   Favorites.setFavorites(settings.favorites, settings.favoritesFilter);
   if (settings.autoRefresh > 0) {
     const timerContainer = document.createElement('div');
