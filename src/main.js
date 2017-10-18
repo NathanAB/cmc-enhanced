@@ -30,14 +30,16 @@ chrome.storage.sync.get({
   favorites: [],
   favoritesFilter: false,
 }, (settings) => {
+
   if (settings.darkTheme) {
       document.body.classList.add('dark');
   }
+
   if (inIframe()) {
     CoinPage.shrinkToChart();
     return;
   }
-  
+
   Favorites.setFavorites(settings.favorites, settings.favoritesFilter);
   if (settings.autoRefresh > 0) {
     const timerContainer = document.createElement('div');
