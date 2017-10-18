@@ -26,13 +26,9 @@ function inIframe() {
 // Load settings first
 chrome.storage.sync.get({
   autoRefresh: 10,
-  darkTheme: true,
   favorites: [],
   favoritesFilter: false,
 }, (settings) => {
-  if (settings.darkTheme) {
-      document.body.classList.add('dark');
-  }
   if (inIframe()) {
     CoinPage.shrinkToChart();
     return;

@@ -30,6 +30,16 @@
       "css": [
         "css/style.css"
       ]
+    },
+    {
+      "matches": [
+        "https://coinmarketcap.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/start.js"
+      ],
+      "run_at": "document_start"
     }
   ]
 }

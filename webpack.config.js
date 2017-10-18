@@ -2,13 +2,14 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: [
-    './src/main.js',
-    './css/night-theme.scss',
-  ],
+  entry: {
+    'bundle': './src/main.js',
+    'start': './src/start.js',
+    'css': './css/night-theme.scss',
+  },
   output: {
     path: `${__dirname}/build`,
-    filename: 'js/bundle.js',
+    filename: 'js/[name].js',
   },
   devtool: 'eval',
   module: {
