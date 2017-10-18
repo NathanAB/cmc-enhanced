@@ -1,6 +1,7 @@
 $bgDarker: #1e212e;
 $bgDark: #252839;
 $bgDarkHover: #373C55;
+$bgLightHover: #e0e0ff;
 $lowVolBg: #282a33;
 $noDataBg: #2c2d30;
 $bgLight: #DDD;
@@ -14,6 +15,86 @@ $greenText: #49c773;
 $linkColor: #f2b632;
 
 body {
+    /* --- INLINE GRAPHS --- */
+    
+    #currencies_wrapper, #currencies-all_wrapper {
+      table tbody tr {
+        cursor: pointer;
+        transition: height 1s;
+
+        &:hover {
+          background-color: $bgLightHover;
+        }
+
+        iframe {
+          width: 100%;
+          height: 680px;
+          border: none;
+        }
+
+        &.detail-view td {
+          padding: 0px;
+          overflow: hidden;
+        }
+
+        .detail-curtain {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          background-color: $bgLight;
+          font-size: 32px;
+          padding-top: 100px;
+        }
+      }
+    }
+
+
+  // Responsive Table
+  .DTFC_Cloned {
+    td, th {
+      background-color: $bgLight;
+    }
+  }
+  .DTFC_LeftWrapper .DTFC_LeftHeadWrapper, .DTFC_LeftWrapper .DTFC_LeftBodyWrapper {
+    border-color: $borderColor !important;
+  }
+
+
+  .favorite-star {
+    color: $linkColor;
+    font-size: 18px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .text-large .favorite-star {
+    margin-left: 8px;
+    margin-bottom: 6px;
+    vertical-align: middle;
+  }
+
+  .favorites-filter {
+    padding-top: 11px;
+    padding-left: 10px;
+
+    label {
+      font-weight: normal;
+
+      input {
+        vertical-align: top;
+      }
+    }
+  }
+}
+
+
+body.dark {
   color: $textColor !important;
   background-color: $bgDark !important;
 
@@ -253,6 +334,7 @@ body {
     }
   }
 }
+
 
 // Ad removal
 .GoogleActiveViewClass,

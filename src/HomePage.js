@@ -2,7 +2,8 @@ const Favorites = require('./Favorites');
 const $ = require('jquery');
 
 let volCapSortOrder = true;
-const nightTheme = true;
+//const nightTheme = true;
+const nightTheme = document.body.classList.contains('dark');
 
 function sortTable(table, col, reverse) {
   const tb = table.tBodies[0];
