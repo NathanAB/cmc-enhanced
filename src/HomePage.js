@@ -2,8 +2,7 @@ const Favorites = require('./Favorites');
 const $ = require('jquery');
 
 let volCapSortOrder = true;
-//const nightTheme = true;
-const nightTheme = document.body.classList.contains('dark');
+const darkTheme = document.documentElement.classList.contains('cmce-dark');
 
 function sortTable(table, col, reverse) {
   const tb = table.tBodies[0];
@@ -65,7 +64,7 @@ function addNewColumn($row, columnOffset) {
   let colorRatio;
   let alpha;
 
-  if (nightTheme) {
+  if (darkTheme) {
     colorRatio = 100 - ((Math.min(volToCap, VOL_CAP_MAX) / VOL_CAP_MAX) * 45);
     alpha = 0.8;
   } else {

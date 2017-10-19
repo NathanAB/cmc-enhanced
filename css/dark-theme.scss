@@ -14,9 +14,9 @@ $redText: #de5858;
 $greenText: #49c773;
 $linkColor: #f2b632;
 
+// Light theme
 body {
     /* --- INLINE GRAPHS --- */
-    
     #currencies_wrapper, #currencies-all_wrapper {
       table tbody tr {
         cursor: pointer;
@@ -93,8 +93,8 @@ body {
   }
 }
 
-
-.dark body {
+// Dark theme
+.cmce-dark body {
   color: $textColor !important;
   background-color: $bgDark !important;
 

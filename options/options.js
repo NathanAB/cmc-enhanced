@@ -11,7 +11,7 @@ function saveOptions() {
 // Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
 function restoreOptions() {
-  // Night theme on by default
+  // Dark theme on by default
   chrome.storage.sync.get({
     autoRefresh: 15,
     darkTheme: true,

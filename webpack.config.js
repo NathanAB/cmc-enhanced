@@ -3,9 +3,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    'bundle': './src/main.js',
-    'start': './src/start.js',
-    'css': './css/night-theme.scss',
+    bundle: [
+      './src/main.js',
+      './css/dark-theme.scss',
+    ],
+    start: './src/ApplyTheme.js',
   },
   output: {
     path: `${__dirname}/build`,
