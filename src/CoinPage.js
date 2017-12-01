@@ -28,26 +28,17 @@ function updateCoinPage($coinPageTitle, $coinPageLinkList) {
 
 function shrinkToChart() {
   document.body.style.overflow = 'hidden';
-  const divEls = document.getElementsByTagName('div');
-  for (var i = 0; i < divEls.length; ++i) {
-    if (divEls[i].parentNode != document.body) continue;
-    if (divEls[i].className != 'container') {
-      divEls[i].style.display = 'none';
-    }
-  }
-  const mainEl = document.getElementsByClassName('row bottom-margin-1x')[1];
-  const containerChildren = document.getElementsByClassName('col-xs-12 col-sm-12 col-md-12 col-lg-10')[0].childNodes;
-  for (var i = 0; i < containerChildren.length; ++i) {
-    if (!containerChildren[i].tagName) continue;
-    if (containerChildren[i].tagName.toLowerCase() != 'div' &&
-          containerChildren[i].tagName.toLowerCase() != 'hr' &&
-          containerChildren[i].tagName.toLowerCase() != 'nav') continue;
-    if (containerChildren[i] !== mainEl) {
-      containerChildren[i].style.display = 'none';
-    }
+  const divEls = document.querySelectorAll('div, nav');
+  for (let i = 0; i < divEls.length; i += 1) {
+    divEls[i].style.display = 'none';
   }
 
-  mainEl.childNodes[1].style.display = 'none';
+  let chartEl = document.getElementsByClassName('highcharts-container')[0];
+  chartEl.style.display = 'block';
+  while (chartEl.parentElement) {
+    chartEl = chartEl.parentElement;
+    chartEl.style.display = 'block';
+  }
 }
 
 module.exports = {

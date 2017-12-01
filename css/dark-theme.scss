@@ -103,7 +103,7 @@ body {
   }
   
   /* --- TOP BAR --- */
-  #top-nav-outer-container {
+  #top-nav-outer-container, .global-stats {
     background-color: $bgDarker !important;
     border-color: $borderColor !important;
   }
@@ -176,7 +176,7 @@ body {
     }
 
     /* --- MAIN NAV --- */
-    #nav-main {
+    #nav-main, .navbar {
       background-color: $bgDarker !important;
       border-color: $borderColor !important;
 
