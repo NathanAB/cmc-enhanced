@@ -10,7 +10,7 @@ const $currencyRows = $('#currencies_wrapper table tbody tr');
 const $currencyAllHeader = $('#currencies-all_wrapper table thead tr');
 const $currencyAllRows = $('#currencies-all_wrapper table tbody tr');
 const $coinPageTitle = $('.col-sm-4.col-md-4');
-const $coinPageLinkList = $('.row .list-unstyled');
+const $coinPageLinkList = $('.row .list-unstyled')[0];
 
 
 function inIframe() {
