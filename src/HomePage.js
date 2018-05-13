@@ -1,4 +1,3 @@
-const Favorites = require('./Favorites');
 const $ = require('jquery');
 
 let volCapSortOrder = true;
@@ -34,7 +33,6 @@ function sortTable(table, col, reverse) {
  */
 function addNewHeader($table, $currencyHeader, columnOffset) {
   const $neighbor = $currencyHeader.children[$currencyHeader.childElementCount - columnOffset];
-  const $favHeader = $currencyHeader.children[0].cloneNode(true);
   const $newColumnHeader = $neighbor.cloneNode(true);
 
   $newColumnHeader.className = 'sortable text-right sorting';
@@ -45,13 +43,7 @@ function addNewHeader($table, $currencyHeader, columnOffset) {
     sortTable($table, $currencyHeader.childElementCount - columnOffset - 1, volCapSortOrder);
   });
 
-  $favHeader.className = 'sortable text-right sorting';
-  $favHeader.attributes['aria-label'].value = 'Favorite';
-  $favHeader.id = 'th-fav';
-  $favHeader.innerHTML = 'Fav.';
-
   $currencyHeader.insertBefore($newColumnHeader, $neighbor);
-  $currencyHeader.insertBefore($favHeader, $currencyHeader.children[0]);
 }
 
 function addNewColumn($row, columnOffset) {
@@ -82,22 +74,13 @@ function addNewColumn($row, columnOffset) {
   $row.insertBefore($newColumnCell, $neighbor);
 }
 
-function addFavoriteStar($row) {
-  const coinName = $row.getAttribute('id').substr(3);
-  const $neighbor = $row.children[0];
-  const $newColumnCell = document.createElement('td');
-  $newColumnCell.className = 'no-wrap text-right';
-  $newColumnCell.appendChild(Favorites.createStarElem(coinName));
-  $row.insertBefore($newColumnCell, $neighbor);
-}
-
 function makeRowClickable($row) {
   const coinRowId = `${$row.getAttribute('id')}_rowDetail`;
   const iframeId = `${$row.getAttribute('id')}_rowIframe`;
   const numCols = $row.getElementsByTagName('td').length;
   const href = $row.getElementsByTagName('a')[0].href;
-  $row.onclick = (e) => {
-    if (e.target.tagName.toLowerCase() === 'a' || e.target.classList.contains('favorite-star')) {
+  $row.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn') || (e.target.getAttribute('alt') === 'More')) {
       return;
     }
 
@@ -138,14 +121,13 @@ function makeRowClickable($row) {
         $(curtain).fadeOut('slow');
       }, 2500);
     }
-  };
+  }, false);
 }
 
 function updateMainTable($table, $currencyHeader, $currencyRows, columnOffset) {
   addNewHeader($table, $currencyHeader, columnOffset);
   for (let i = 0; i < $currencyRows.length; i += 1) {
     addNewColumn($currencyRows[i], columnOffset);
-    addFavoriteStar($currencyRows[i]);
     makeRowClickable($currencyRows[i]);
   }
 }

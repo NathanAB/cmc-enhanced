@@ -1,10 +1,5 @@
-const Favorites = require('./Favorites');
-const $ = require('jquery');
-
 function updateCoinPage($coinPageTitle, $coinPageLinkList) {
-  const coinName = window.location.pathname.split('/')[2];
   const coinAbbr = $coinPageTitle.querySelector('small').textContent.slice(1, -1);
-  const coinSubtitle = $coinPageTitle.querySelector('.hidden-xs');
   const tradingViewURL = `https://www.tradingview.com/symbols/${coinAbbr}USD/`;
 
   const $chartIcon = document.createElement('span');
@@ -22,8 +17,6 @@ function updateCoinPage($coinPageTitle, $coinPageLinkList) {
   $chartLinkListItem.prepend($chartIcon);
 
   $coinPageLinkList.prepend($chartLinkListItem);
-
-  coinSubtitle.appendChild(Favorites.createStarElem(coinName));
 }
 
 function shrinkToChart() {
